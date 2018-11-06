@@ -87,8 +87,13 @@ class OrderController {
 	 * @param modelMap
 	 * @return
 	 */
+
+	static String genre;
+
 	@PostMapping("/cart")
 	String addDisc(@RequestParam("pid") Disc disc, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+
+		genre = disc.getGenre();
 
 		// (｡◕‿◕｡)
 		// Das Inputfeld im View ist eigentlich begrenzt, allerdings sollte man immer auch serverseitig validieren
@@ -97,17 +102,20 @@ class OrderController {
 		// (｡◕‿◕｡)
 		// Wir fügen dem Warenkorb die Disc in entsprechender Anzahl hinzu.
 		cart.addOrUpdateItem(disc, Quantity.of(amount));
-
 		// (｡◕‿◕｡)
 		// Je nachdem ob disc eine DVD oder eine Bluray ist, leiten wir auf die richtige Seite weiter
 
-		switch (disc.getType()) {
+		/*switch (disc.getType()) {
 			case DVD:
 				return "redirect:dvds";
 			case BLURAY:
 			default:
 				return "redirect:blurays";
-		}
+
+		}*/
+
+		//rather wanted a redirect to similar movies than blurays or dvds
+		return "redirect:suggestions";
 	}
 
 	@GetMapping("/cart")

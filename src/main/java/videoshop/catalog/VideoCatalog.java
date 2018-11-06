@@ -49,4 +49,7 @@ public interface VideoCatalog extends Catalog<Disc> {
 	default Iterable<Disc> findByType(DiscType type) {
 		return findByType(type, DEFAULT_SORT);
 	}
+
+	Iterable<Disc> findByGenre(String genre);
+
 }
